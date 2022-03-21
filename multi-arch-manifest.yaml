@@ -11,6 +11,21 @@ manifests:
     platform:
       architecture: amd64
       os: linux
+  - image: nimmis/mtest:20.04-arm32v5
+    platform:
+      architecture: arm
+      os: linux
+      variant: v5
+  - image: nimmis/mtest:20.04-arm32v7
+    platform:
+      architecture: arm
+      os: linux
+      variant: v7
+  - image: nimmis/mtest:20.04-arm64v8
+    platform:
+      architecture: arm64
+      os: linux
+      variant: v8
 
 image: nimmis/mtest:18.04
 manifests:

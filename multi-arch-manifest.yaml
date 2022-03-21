@@ -6,7 +6,7 @@ manifests:
       os: linux
 image: nimmis/ubuntu:18.04
 manifests:
-  - image: nimmis/ubuntu:latest-amd64
+  - image: nimmis/ubuntu:18.04-amd64
     platform:
       architecture: amd64
       os: linux

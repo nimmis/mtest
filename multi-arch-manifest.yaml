@@ -1,12 +1,18 @@
-image: nimmis/ubuntu:latest
+image: nimmis/mtest:latest
 manifests:
-  - image: nimmis/ubuntu:latest-amd64
+  - image: nimmis/mtest:latest-amd64
+    platform:
+      architecture: amd64
+      os: linux
+image: nimmis/ubuntu:20.04
+manifests:
+  - image: nimmis/mtest:20.04-amd64
     platform:
       architecture: amd64
       os: linux
 image: nimmis/ubuntu:18.04
 manifests:
-  - image: nimmis/ubuntu:18.04-amd64
+  - image: nimmis/mtest:18.04-amd64
     platform:
       architecture: amd64
       os: linux

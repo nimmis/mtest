@@ -4,15 +4,27 @@ manifests:
     platform:
       architecture: amd64
       os: linux
-image: nimmis/ubuntu:20.04
+image: nimmis/mtest:20.04
 manifests:
   - image: nimmis/mtest:20.04-amd64
     platform:
       architecture: amd64
       os: linux
-image: nimmis/ubuntu:18.04
+image: nimmis/mtest:18.04
 manifests:
   - image: nimmis/mtest:18.04-amd64
+    platform:
+      architecture: amd64
+      os: linux
+image: nimmis/mtest:16.04
+manifests:
+  - image: nimmis/mtest:16.04-amd64
+    platform:
+      architecture: amd64
+      os: linux
+image: nimmis/mtest:14.04
+manifests:
+  - image: nimmis/mtest:14.04-amd64
     platform:
       architecture: amd64
       os: linux

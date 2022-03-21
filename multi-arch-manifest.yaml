@@ -48,18 +48,38 @@ manifests:
       architecture: arm64
       os: linux
       variant: v8
-image: nimmis/mtest:16.04
 
+image: nimmis/mtest:16.04
 manifests:
   - image: nimmis/mtest:16.04-amd64
     platform:
       architecture: amd64
       os: linux
-image: nimmis/mtest:14.04
+  - image: nimmis/mtest:16.04-arm32v7
+    platform:
+      architecture: arm
+      os: linux
+      variant: v7
+  - image: nimmis/mtest:16.04-arm64v8
+    platform:
+      architecture: arm64
+      os: linux
+      variant: v8
 
+image: nimmis/mtest:14.04
 manifests:
   - image: nimmis/mtest:14.04-amd64
     platform:
       architecture: amd64
       os: linux
+  - image: nimmis/mtest:14.04-arm32v7
+    platform:
+      architecture: arm
+      os: linux
+      variant: v7
+  - image: nimmis/mtest:14.04-arm64v8
+    platform:
+      architecture: arm64
+      os: linux
+      variant: v8
 

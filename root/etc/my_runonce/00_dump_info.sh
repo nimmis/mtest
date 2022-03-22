@@ -5,6 +5,6 @@
 #
 # (c) 2017 nimmis <kjell.havneskold@gmail.com>
 #
-
+echo "Hardware Architecture: $(uname -m)"
 cat /etc/BUILDS/*
 

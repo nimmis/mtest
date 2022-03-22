@@ -10,7 +10,7 @@ COPY root/. /
 RUN apt-get update && \
 
     # install neede packages
-    apt-get install  -y --no-install-recommends ca-certificates && \
+    apt-get install  -y --no-install-recommends ca-certificates python && \
 
     # missing tzdata in 18.04 beta
 

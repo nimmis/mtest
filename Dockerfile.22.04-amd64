@@ -10,7 +10,7 @@ COPY root/. /
 RUN mkdir -pv /var/cache/apt/archives/partial
 RUN mkdir -pv /var/lib/apt/lists/partial
 RUN rm -r /var/lib/apt/lists/*
-
+RUN apt-get upgrade
 # Set environment variables.
 ENV HOME /root
 

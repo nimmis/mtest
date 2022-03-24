@@ -7,29 +7,29 @@ ENV DEBIAN_FRONTEND noninteractive
 
 COPY root/. /
 
-RUN apt-get update && \
+RUN apt-get update 
 
     # install neede packages
-    apt-get install  -y --no-install-recommends ca-certificates python2 && \
+RUN    apt-get install  -y --no-install-recommends ca-certificates python2 
 
     # missing tzdata in 18.04 beta
 
-    apt-get install -y tzdata && \
+RUN    apt-get install -y tzdata 
  
     # upgrade OS
-    apt-get -y dist-upgrade && \
+RUN    apt-get -y dist-upgrade 
 
     # Make info file about this build
-    mkdir -p /etc/BUILDS/ && \
-    printf "Build of nimmis/ubuntu:22.04, date: %s\n"  `date -u +"%Y-%m-%dT%H:%M:%SZ"` > /etc/BUILDS/ubuntu && \
+RUN    mkdir -p /etc/BUILDS/ 
+RUN    printf "Build of nimmis/ubuntu:22.04, date: %s\n"  `date -u +"%Y-%m-%dT%H:%M:%SZ"` > /etc/BUILDS/ubuntu 
 
     # run os fixes for Ubuntu
-    /fix.sh && rm -f /fix.sh && \
+RUN    /fix.sh && rm -f /fix.sh 
 
-    apt-get autoremove -y && \
+RUN    apt-get autoremove -y 
 
     # remove apt cache from image
-    apt-get clean all
+RUN    apt-get clean all
 
 # Set environment variables.
 ENV HOME /root

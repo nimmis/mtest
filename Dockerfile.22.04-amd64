@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 COPY root/. /
 
-RUN apt-gat update && apt-get upgrade -y 
+RUN apt update && apt upgrade -y 
 
     # install neede packages
 RUN    apt-get install  -y --no-install-recommends ca-certificates && \

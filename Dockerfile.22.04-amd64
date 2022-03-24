@@ -14,7 +14,7 @@ RUN apt-get upgrade -y && \
 
     # python 2 not installed by default
 
-    apt install -y python2
+    apt install -y python2 && \
 
     # missing tzdata in 18.04 beta
 

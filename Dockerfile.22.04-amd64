@@ -7,10 +7,14 @@ ENV DEBIAN_FRONTEND noninteractive
 
 COPY root/. /
 
-RUN apt-get upgrade && \
+RUN apt upgrade -y && \
 
     # install neede packages
-    apt-get install  -y --no-install-recommends ca-certificates python2 && \
+    apt-get install  -y --no-install-recommends ca-certificates && \
+
+    # python 2 not installed by default
+
+    apt install -y python2
 
     # missing tzdata in 18.04 beta
 

@@ -1,4 +1,4 @@
-FROM ubuntu:jammy-20220315
+FROM ubuntu:22.04
 
 MAINTAINER nimmis <kjell.havneskold@gmail.com>
 
@@ -7,10 +7,30 @@ ENV DEBIAN_FRONTEND noninteractive
 
 COPY root/. /
 
-RUN mkdir -pv /var/cache/apt/archives/partial
-RUN mkdir -pv /var/lib/apt/lists/partial
-RUN rm -r /var/lib/apt/lists/*
-RUN apt-get upgrade
+RUN apt-get upgrade && \
+
+    # install neede packages
+    apt-get install  -y --no-install-recommends ca-certificates python2 && \
+
+    # missing tzdata in 18.04 beta
+
+    apt-get install -y tzdata && \
+ 
+    # upgrade OS
+    apt-get -y dist-upgrade && \
+
+    # Make info file about this build
+    mkdir -p /etc/BUILDS/ && \
+    printf "Build of nimmis/ubuntu:22.04, date: %s\n"  `date -u +"%Y-%m-%dT%H:%M:%SZ"` > /etc/BUILDS/ubuntu && \
+
+    # run os fixes for Ubuntu
+    /fix.sh && rm -f /fix.sh && \
+
+    apt-get autoremove -y && \
+
+    # remove apt cache from image
+    apt-get clean all
+
 # Set environment variables.
 ENV HOME /root
 

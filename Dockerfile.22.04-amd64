@@ -7,10 +7,10 @@ ENV DEBIAN_FRONTEND noninteractive
 
 COPY root/. /
 
-RUN apt-gat update && apt-get upgrade -y && \
+RUN apt-gat update && apt-get upgrade -y 
 
     # install neede packages
-    apt-get install  -y --no-install-recommends ca-certificates && \
+RUN    apt-get install  -y --no-install-recommends ca-certificates && \
 
     # python 2 not installed by default
 

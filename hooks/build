@@ -32,9 +32,9 @@ echo "[---] GITHUB_USERREPO: ${GITHUB_USERREPO}"
 echo "[---] DESCRIPTION: ${DESCRIPTION}"
 
 ## Build all variant images.
-for FILE in ${DOCKERFILE_PATH}.*
+for FILE in ${DOCKERFILE_PATH}-*
 do
-    TARGET_ARCH=$(echo "${FILE}" | cut -d '.' -f 2)
+    TARGET_ARCH=$(echo "${FILE}" | cut -d '-' -f 2)
 
     ## FUDGE Factor because Docker Hub does not respect "32" in os/arch model
     case "$TARGET_ARCH" in
@@ -56,7 +56,7 @@ do
     docker run --rm --privileged multiarch/qemu-user-static:register --reset
 
     docker build \
-        --file "${DOCKERFILE_PATH}.${TARGET_ARCH}" \
+        --file "${DOCKERFILE_PATH}-${TARGET_ARCH}" \
         --build-arg APPLICATION=${APPLICATION} \
         --build-arg BUILD_RFC3339=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
         --build-arg REVISION=$(git rev-parse --short HEAD) \

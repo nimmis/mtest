@@ -42,8 +42,8 @@ for FILE in ${DOCKERFILE_PATH}.*
 do
     ##TARGET_ARCH=$(echo "${FILE}" | cut -d '.' -f 2)
     TARGET=$(echo "${FILE}" | cut -d '.' -f2-)
-    TARGET_ARCH=$(echo "${FILE}" | cut -d '-' -f 2)
-    TARGET_TAG=$(echo "${FILE}" | cut -d '-' -f 1)
+    TARGET_ARCH=$(echo "${TARGET}" | cut -d '-' -f 2)
+    TARGET_TAG=$(echo "${TARGET}" | cut -d '-' -f 1)
 
     echo "[---] TARGET_ARCH: ${TARGET_ARCH}"
 

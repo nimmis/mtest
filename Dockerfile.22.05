@@ -7,10 +7,8 @@ ENV DEBIAN_FRONTEND noninteractive
 
 COPY root/. /
 
-RUN apt update -y 
-
     # install neede packages
-RUN    apt-get install  -y --no-install-recommends ca-certificates && \
+RUN    \
 
     # remove apt cache from image
     apt-get clean all

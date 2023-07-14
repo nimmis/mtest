@@ -72,7 +72,7 @@ echo "[***] Current Build: ${TARGET_TAG}"
 
 ## Iterate over architectures
 MULTIARCH="${DEFAULT_ARCH}"
-MANIFESTFILE="${DOCKERFILE_PATH}_manifest
+MANIFESTFILE="${DOCKERFILE_PATH}_manifest"
 
 #for FILE in ${DOCKERFILE_PATH}-*
 #do

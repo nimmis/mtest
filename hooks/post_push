@@ -16,10 +16,12 @@ TOOL_LATEST_TAG=$(curl -s https://api.github.com/repos/estesp/manifest-tool/tags
     | cut -d '"' -f 4)
 
 echo "[***] Downloading ${TOOL_DOWNLOAD_URL}/${TOOL_LATEST_TAG}/manifest-tool-linux-amd64"
-#curl -Lo manifest-tool ${TOOL_DOWNLOAD_URL}/${TOOL_LATEST_TAG}/manifest-tool-linux-amd64
-#chmod +x manifest-tool
-curl -Lo manifest-tool https://github.com/estesp/manifest-tool/releases/download/v0.9.0/manifest-tool-linux-amd64
+#curl -Lo manifest-tool ${TOOL_DOWNLOAD_URL}/${TOOL_LATEST_TAG}/binaries-manifest-tool-2.0.8.tar.gz
+curl -L https://github.com/estesp/manifest-tool/releases/download/v2.0.8/binaries-manifest-tool-2.0.8.tar.gz | tar xz
+mv manifest-tool-linux-amd64 manifest-tool
 chmod +x manifest-tool
+#curl -Lo manifest-tool https://github.com/estesp/manifest-tool/releases/download/v0.9.0/manifest-tool-linux-amd64
+#chmod +x manifest-tool
 
 
 ## add_tag will add a tag and a manifest for each version
@@ -28,10 +30,10 @@ function add_tag() {
     docker tag $IMAGE_NAME $DOCKER_REPO:$1
     docker push $DOCKER_REPO:$1
 
-    echo "[---] Running ./manifest-tool push from-args --platforms '${2}' --template '${IMAGE_NAME}_ARCHVARIANT' --target '${DOCKER_REPO}:${1}'"
+    echo "[---] Running ./manifest-tool push from-args --platforms '${2}' --template '${IMAGE_NAME}_ARCH' --target '${DOCKER_REPO}:${1}'"
     ./manifest-tool push from-args \
         --platforms ${2} \
-        --template ${IMAGE_NAME}_ARCHVARIANT \
+        --template ${IMAGE_NAME}_ARCH \
         --target ${DOCKER_REPO}:${1}
 }
 

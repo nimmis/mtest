@@ -37,7 +37,7 @@ echo "image: ${MANIFEST_TAG}" > $MANIFEST
 echo "manifests:" >> $MANIFEST
 
 function add_manifest() {
-  echo "[---] Adding manifest ${1} ${2} ${3}
+  echo "[---] Adding manifest ${1} ${2} ${3}"
   echo "  - image: ${MANIFEST_TAG}_${1}" >> $MANIFEST
   echo "    platform:" >> $MANIFEST
   echo "      architecture: ${2}" >> $MANIFEST

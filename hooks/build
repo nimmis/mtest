@@ -54,7 +54,7 @@ do
 
     # Not exactly sure this needs to run EVERY time, but for good measure.
     docker run --rm --privileged multiarch/qemu-user-static:register --reset
-
+    echo "[---] Building target ${BUILD_ARCH}"
     docker build \
         --file "${DOCKERFILE_PATH}-${TARGET_ARCH}" \
         --build-arg APPLICATION=${APPLICATION} \
@@ -67,7 +67,7 @@ do
         .
 done
 
-
+echo "[---] Building primary target ${DEFAULT_ARCH}"
 ## Build the prime image at the end.
 docker build \
     --file "${DOCKERFILE_PATH}" \

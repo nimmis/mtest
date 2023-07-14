@@ -1,0 +1,16 @@
+image: nimmis/mtest:22.04
+manifests:
+  - image: nimmis/mtest:22.04_amd64
+    platform:
+      architecture: amd64
+      os: linux
+  - image: nimmis/mtest:22.04_armv7
+    platform:
+      architecture: arm
+      os: linux
+      variant: v7
+  - image: nimmis/mtest:22.04_arm64v8
+    platform:
+      architecture: arm64
+      os: linux
+      variant: v8

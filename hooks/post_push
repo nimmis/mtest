@@ -28,9 +28,24 @@ function add_tag() {
 
 ## Push all variant images
 ## must be done in post_push
-for FILE in ${DOCKERFILE_PATH}-*
+
+MANIFEST=${DOCKERFILE_PATH}-build-manifest
+MANIFEST_TAG=$(echo "${IMAGE_NAME}"| cut -d '/' -f2-)
+
+#reset file
+echo "image: ${MANIFEST_TAG}" > $MANIFEST
+echo "manifests:" >> $MANIFEST
+
+function add_manifest() {
+  echo "  - image: ${MANIFEST_TAG}_${1}" >> $MANIFEST
+  echo "    platform:" >> $MANIFEST
+  echo "      architecture: ${2}" >> $MANIFEST
+  echo "      os: linux" >> $MANIFEST
+  [[ ! -z "${3}" ]] && echo "      variant: ${3}" >> $MANIFEST
+}
+for FILE in ${DOCKERFILE_PATH}.*
 do
-    TARGET_ARCH=$(echo "${FILE}" | cut -d '-' -f 2)
+    TARGET_ARCH=$(echo "${FILE}" | cut -d '.' -f 2)
 
     echo "[---] TARGET_ARCH: ${TARGET_ARCH}"
 
@@ -38,15 +53,22 @@ do
     case "$TARGET_ARCH" in
         *arm32v5)
             BUILD_ARCH="armv5"
+            add_manifest armv6 arm v5
             ;;
         *arm32v6)
             BUILD_ARCH="armv6"
+            add_manifest armv6 arm v6
             ;;
         *arm32v7)
             BUILD_ARCH="armv7"
+            add_manifest armv6 arm v7
+        arm64v8)
+            BUILD_ARCH="arm64v8"
+            add_manifest arm64v8 arm64
             ;;
         *)
             BUILD_ARCH="${TARGET_ARCH}"
+            add_manifest arm64v8 arm64
             ;;
     esac
 
@@ -60,6 +82,6 @@ echo "[***] Current Build: ${TARGET_TAG}"
 
 MANIFESTFILE="${DOCKERFILE_PATH}-manifest"
 
-echo "[***] updating ./manifest-tool push from-spec ${MANIFESTFILE}"
-./manifest-tool push from-spec ${MANIFESTFILE}
+echo "[***] updating ./manifest-tool push from-spec ${MANIFEST}"
+./manifest-tool push from-spec ${MANIFEST}
 exit $?

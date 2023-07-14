@@ -16,7 +16,9 @@ TOOL_LATEST_TAG=$(curl -s https://api.github.com/repos/estesp/manifest-tool/tags
     | cut -d '"' -f 4)
 
 echo "[***] Downloading ${TOOL_DOWNLOAD_URL}/${TOOL_LATEST_TAG}/manifest-tool-linux-amd64"
-curl -Lo manifest-tool ${TOOL_DOWNLOAD_URL}/${TOOL_LATEST_TAG}/manifest-tool-linux-amd64
+#curl -Lo manifest-tool ${TOOL_DOWNLOAD_URL}/${TOOL_LATEST_TAG}/manifest-tool-linux-amd64
+#chmod +x manifest-tool
+curl -Lo manifest-tool https://github.com/estesp/manifest-tool/releases/download/v0.9.0/manifest-tool-linux-amd64
 chmod +x manifest-tool
 
 
@@ -38,7 +40,10 @@ function add_tag() {
 ## must be done in post_push
 for FILE in ${DOCKERFILE_PATH}.*
 do
-    TARGET_ARCH=$(echo "${FILE}" | cut -d '.' -f 2)
+    ##TARGET_ARCH=$(echo "${FILE}" | cut -d '.' -f 2)
+    TARGET=$(echo "${FILE}" | cut -d '.' -f2-)
+    TARGET_ARCH=$(echo "${FILE}" | cut -d '-' -f 2)
+    TARGET_TAG=$(echo "${FILE}" | cut -d '-' -f 1)
 
     echo "[---] TARGET_ARCH: ${TARGET_ARCH}"
 

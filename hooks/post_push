@@ -72,7 +72,7 @@ do
             ;;
         *)
             BUILD_ARCH="${TARGET_ARCH}"
-            add_manifest arm64v8 arm64
+            add_manifest ${TARGET_ARCH} ${TARGET_ARCH}
             ;;
     esac
 
@@ -80,7 +80,8 @@ do
 
     docker push ${IMAGE_NAME}_${BUILD_ARCH}
 done
-
+# add main target
+add_manifest amd64 amd64
 
 echo "[***] Current Build: ${TARGET_TAG}"
 
